@@ -7,6 +7,33 @@ import Tabel from "../../components/molecules/Tabel";
 const EmployeePage = () => {
   const [handleModal, setHandleModal] = useState(false);
 
+  const column = [
+    {
+      field: "code",
+      name: "KODE",
+    },
+    {
+      field: "name",
+      name: "NAMA",
+    },
+    {
+      field: "alamat",
+      name: "ADDRESS",
+    },
+    {
+      field: "account_number",
+      name: "NO. REKENING",
+    },
+    {
+      field: "salary",
+      name: "GAJI",
+    },
+    {
+      field: "process",
+      name: "PROSES",
+    },
+  ];
+
   const AddItem = (
     <div className="px-10 py-6 bg-white max-w-max rounded-md __montserat-text">
       <h1 className="font-bold pt-4 text-2xl text-center">
@@ -120,7 +147,7 @@ const EmployeePage = () => {
                 </button>
               </div>
               <div className="mt-8">
-                <Tabel />
+                <Tabel column={column} />
               </div>
             </div>
           </div>
