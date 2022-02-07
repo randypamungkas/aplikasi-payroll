@@ -10,12 +10,10 @@ import "@material-tailwind/react/tailwind.css";
 import Navbar from "./components/molecules/Navbar";
 
 const isAuth = true;
-
 function App() {
   return (
     <Router>
-      <Navbar />
-      <div className="pt-14 min-h-screen">
+      <div>
         <Routes>
           {RouteList.map((el, index) => (
             <Route
@@ -24,12 +22,26 @@ function App() {
               element={
                 el.permission ? (
                   isAuth ? (
-                    el.component
+                    <div
+                      className={`${
+                        el.path === "/login" && "pt-14"
+                      } min-h-screen`}
+                    >
+                      {el.path !== "/login" && <Navbar />}
+                      {el.component}
+                    </div>
                   ) : (
                     <Navigate to="/login" />
                   )
                 ) : (
-                  el.component
+                  <div
+                    className={`${
+                      el.path === "/login" && "pt-14"
+                    } min-h-screen`}
+                  >
+                    {el.path !== "/login" && <Navbar />}
+                    {el.component}
+                  </div>
                 )
               }
               key={index}

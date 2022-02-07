@@ -17,14 +17,14 @@ export const staticConst = {
           menu: {
             title: "Data Gaji Karyawan",
             icon: <BiMoney className="text-xl" />,
-            path: "/employee_salary",
+            path: "/employee-salary",
           },
         },
         {
           menu: {
             title: "Cetak Slip Gaji Karyawan",
             icon: <BiPrinter className="text-xl" />,
-            path: "/employee_payslips",
+            path: "/employee-payslips",
           },
         },
       ],
