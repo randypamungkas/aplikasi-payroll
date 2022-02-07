@@ -20,14 +20,14 @@ const routeList = [
   },
   {
     name: "Data Gaji Karyawan",
-    path: "/employee_salary",
+    path: "/employee-salary",
     exact: true,
     component: <EmployeeSalary />,
     permission: false,
   },
   {
     name: "Cetak Slip Gaji Karyawan",
-    path: "/employee_payslips",
+    path: "/employee-payslips",
     exact: true,
     component: <EmployeePaySlips />,
     permission: false,
