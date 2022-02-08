@@ -55,7 +55,7 @@ const EmployeeSalary = () => {
             <div className="mb-11">
               <div className="flex justify-between items-center border-b-2 border-gray-200 pb-4">
                 <div>
-                  <div className="font-semibold">Data Karyawan</div>
+                  <div className="font-semibold">Data Gaji Karyawan</div>
                 </div>
               </div>
               <div className="mt-8">
