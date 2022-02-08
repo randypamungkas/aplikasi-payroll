@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import RouteList from "./routes/MainRoutes";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import "@material-tailwind/react/tailwind.css";
+import Navbar from "./components/molecules/Navbar";
 
+const isAuth = true;
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          {RouteList.map((el, index) => (
+            <Route
+              path={el.path}
+              exact={el.exact}
+              element={
+                el.permission ? (
+                  isAuth ? (
+                    <div
+                      className={`${
+                        el.path === "/login" && "pt-14"
+                      } min-h-screen`}
+                    >
+                      {el.path !== "/login" && <Navbar />}
+                      {el.component}
+                    </div>
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                ) : (
+                  <div
+                    className={`${
+                      el.path === "/login" && "pt-14"
+                    } min-h-screen`}
+                  >
+                    {el.path !== "/login" && <Navbar />}
+                    {el.component}
+                  </div>
+                )
+              }
+              key={index}
+            />
+          ))}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
