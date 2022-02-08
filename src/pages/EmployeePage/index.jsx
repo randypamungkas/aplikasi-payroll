@@ -34,6 +34,71 @@ const EmployeePage = () => {
     },
   ];
 
+  const span1 =[
+    {
+      name:"001"
+    },
+    {
+      name:"Ahmad "
+    },
+    {
+      name:"0524958673"
+    },
+    {
+      name:"GJ001"
+    },
+    {
+      name:"3.500.000,00"
+    },
+    {
+      name:"4.161.849,00"
+    },
+    {
+      name:"34.161.849,00"
+    },
+    {
+      name:"29/11/2018"
+    },
+    {
+      name:"05:21:01"
+    },
+    {
+      name: <button>Cetak</button>,
+    },
+  ];
+
+  const span2 =[
+    {
+      name:"001"
+    },
+    {
+      name:"Ahmad "
+    },
+    {
+      name:"0524958673"
+    },
+    {
+      name:"GJ001"
+    },
+    {
+      name:"3.500.000,00"
+    },
+    {
+      name:"242.774,00"
+    },
+    {
+      name:"34.161.849,00"
+    },
+    {
+      name:"29/11/2018"
+    },
+    {
+      name:"05:33:47"
+    },
+    {
+      name: <button>Cetak</button>,
+    },
+  ];
   const AddItem = (
     <div className="px-10 py-6 bg-white max-w-max rounded-md __montserat-text">
       <h1 className="font-bold pt-4 text-2xl text-center">

@@ -44,6 +44,72 @@ const EmployeePaySlips = () => {
       name: "AKSI",
     },
   ];
+  
+  const span1 =[
+    {
+      name:"001"
+    },
+    {
+      name:"Ahmad "
+    },
+    {
+      name:"0524958673"
+    },
+    {
+      name:"GJ001"
+    },
+    {
+      name:"3.500.000,00"
+    },
+    {
+      name:"4.161.849,00"
+    },
+    {
+      name:"34.161.849,00"
+    },
+    {
+      name:"29/11/2018"
+    },
+    {
+      name:"05:21:01"
+    },
+    {
+      name: <button>Cetak</button>,
+    },
+  ];
+
+  const span2 =[
+    {
+      name:"001"
+    },
+    {
+      name:"Ahmad "
+    },
+    {
+      name:"0524958673"
+    },
+    {
+      name:"GJ001"
+    },
+    {
+      name:"3.500.000,00"
+    },
+    {
+      name:"242.774,00"
+    },
+    {
+      name:"34.161.849,00"
+    },
+    {
+      name:"29/11/2018"
+    },
+    {
+      name:"05:33:47"
+    },
+    {
+      name: <button>Cetak</button>,
+    },
+  ];
   return (
     <div>
       <div
@@ -63,6 +129,8 @@ const EmployeePaySlips = () => {
               </div>
               <div className="mt-8">
                 <Tabel column={column} />
+                <Tabel column={span1} />
+                <Tabel column={span2} />
               </div>
             </div>
           </div>
