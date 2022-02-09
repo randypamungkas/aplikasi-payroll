@@ -11,12 +11,12 @@ const Navbar = () => {
         </div>
         <div className="flex justify-between items-center gap-8">
           <div className="dropdown dropdown-left">
-            <div tabindex="0" className="m-1">
+            <div tabIndex="0" className="m-1">
               <CgProfile className="text-3xl" />
             </div>
             <ul
-              tabindex="0"
-              class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
+              tabIndex="0"
+              className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
                 <a href="/login">Logout</a>

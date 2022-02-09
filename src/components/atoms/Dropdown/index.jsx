@@ -2,11 +2,11 @@ import React from "react";
 
 const Dropdown = () => {
   return (
-    <div class="dropdown">
-      <div tabindex="0" class="m-1 btn" />
+    <div className="dropdown">
+      <div tabIndex="0" className="m-1 btn" />
       <ul
-        tabindex="0"
-        class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
+        tabIndex="0"
+        className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
       >
         <li>
           <a>Logout</a>

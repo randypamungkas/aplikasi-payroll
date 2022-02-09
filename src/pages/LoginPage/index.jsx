@@ -8,11 +8,11 @@ const LoginPage = () => {
       <div className="px-0 py-6 bg-white m-auto max-w-max rounded-md __montserat-text">
         <h1 className="font-bold pt-4 text-2xl text-center">Login</h1>
         <div className="mb-7 mt-4">
-          <div class="mb-3 pt-0 flex flex-col">
+          <div className="mb-3 pt-0 flex flex-col">
             <label className="text-sm font-medium text-subtitle">Email</label>
             <input
               type="text"
-              class="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
+              className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{ width: 330 }}
             />
             <p className="text-xs text-gray-400 mt-1">

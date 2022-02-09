@@ -1,8 +1,8 @@
 import React from "react";
-// import { staticConst } from "../../static/staticConst";
-// import { BsPencil } from "react-icons/bs";
+import { BsPencil } from "react-icons/bs";
+import { AiOutlineDelete } from "react-icons/ai";
 
-const Tabel = ({ column }) => {
+const Tabel = ({ column, datas }) => {
   return (
     <div>
       <div className="flex flex-col">
@@ -16,14 +16,60 @@ const Tabel = ({ column }) => {
                       <th
                         key={idx}
                         scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         {col.name}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200"></tbody>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {(datas?.data || []).map((data, idx) => (
+                    <tr key={idx}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                          {data.code}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                          {data.name}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                          {data.address}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                          {data.account_number}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                          {data.salary}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                          <button className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full">
+                            Edit
+                            <span>
+                              <BsPencil className="ml-2 text-sm" />
+                            </span>
+                          </button>
+                          <button className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full">
+                            Hapus
+                            <span>
+                              <AiOutlineDelete className="ml-2 text-sm" />
+                            </span>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
           </div>
