@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { BsPrinterFill } from "react-icons/bs";
 import axios from "axios";
 import SideMenu from "../../components/molecules/SideMenu";
 import Tabel from "../../components/molecules/Tabel";
+import CsvExport from "../../components/molecules/CsvExport";
 
 const EmployeeSalary = () => {
   const [datas, setDatas] = useState(null);
@@ -76,15 +76,7 @@ const EmployeeSalary = () => {
                   <div className="font-semibold">Data Gaji Karyawan</div>
                 </div>
               </div>
-              <button
-                onClick={() => null}
-                className="mt-4 bg-gray-800 flex justify-between hover:text-white transition hover:border-gray-800 items-center text-sm font-medium text-gray-100 py-1.5 px-3 border rounded-full"
-              >
-                <span>
-                  <BsPrinterFill className="mr-2 text-sm" />
-                </span>
-                Cetak Data Gaji
-              </button>
+              <CsvExport exportData={datas} />
               <div className="mt-8">
                 <Tabel column={column} datas={datas} />
               </div>

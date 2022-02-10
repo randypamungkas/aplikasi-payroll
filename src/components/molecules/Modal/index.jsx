@@ -2,7 +2,7 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-export default function Example({ isOpen, handleClose, component }) {
+const Modal = ({ isOpen, handleClose, component }) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -53,4 +53,6 @@ export default function Example({ isOpen, handleClose, component }) {
       </Dialog>
     </Transition.Root>
   );
-}
+};
+
+export default Modal;
