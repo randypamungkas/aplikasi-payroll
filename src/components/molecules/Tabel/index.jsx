@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { BsPencil } from "react-icons/bs";
+import { BsPencil, BsPrinterFill } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
 
 const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
@@ -47,7 +47,7 @@ const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
                                   <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
                                     {data["salary_received"] !== 0
                                       ? moment(data["updatedAt"]).format(
-                                          "h:mm A"
+                                          "HH:mm"
                                         )
                                       : "-"}
                                   </div>
@@ -70,6 +70,21 @@ const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
                                     {Intl.NumberFormat("en-US").format(
                                       data["salary_received"]
                                     )}
+                                  </div>
+                                );
+
+                              case "action":
+                                return (
+                                  <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                                    <button
+                                      onClick={() => null}
+                                      className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                                    >
+                                      Cetak
+                                      <span>
+                                        <BsPrinterFill className="ml-2 text-sm" />
+                                      </span>
+                                    </button>
                                   </div>
                                 );
 

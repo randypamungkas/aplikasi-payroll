@@ -13,7 +13,7 @@ const SideMenu = () => {
             <div
               className={`${
                 el.menu.path === window.location.pathname
-                  ? "bg-gray-600 text-white"
+                  ? "bg-gray-800 text-white"
                   : ""
               } text-sm py-1 hover:bg-gray-100 text-gray-600 hover:text-gray-600 cursor-pointer flex items-center px-4`}
             >
