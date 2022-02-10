@@ -1,7 +1,28 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import SideMenu from "../../components/molecules/SideMenu";
 import Tabel from "../../components/molecules/Tabel";
 
 const EmployeeSalary = () => {
+  const [datas, setDatas] = useState(null);
+
+  const getDatas = async () => {
+    try {
+      const response = await axios({
+        method: "get",
+        url: "http://localhost:5500/employees/get-all-employee",
+      });
+
+      setDatas(response.data.responseData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getDatas();
+  }, []);
+
   const column = [
     {
       field: "code",
@@ -14,10 +35,6 @@ const EmployeeSalary = () => {
     {
       field: "account_number",
       name: "NO. REKENING",
-    },
-    {
-      field: "salary_code",
-      name: "KODE GAJI",
     },
     {
       field: "salary",
@@ -55,11 +72,11 @@ const EmployeeSalary = () => {
             <div className="mb-11">
               <div className="flex justify-between items-center border-b-2 border-gray-200 pb-4">
                 <div>
-                  <div className="font-semibold">Data Karyawan</div>
+                  <div className="font-semibold">Data Gaji Karyawan</div>
                 </div>
               </div>
               <div className="mt-8">
-                <Tabel column={column} />
+                <Tabel column={column} datas={datas} />
               </div>
             </div>
           </div>
