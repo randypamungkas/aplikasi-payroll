@@ -9,13 +9,16 @@ import Tabel from "../../components/molecules/Tabel";
 const EmployeePage = () => {
   const [handleModal, setHandleModal] = useState(false);
   const [datas, setDatas] = useState(null);
+  const [isEdit, setEdit] = useState(false);
   const [employee, setEmployee] = useState({
     id: "",
     code: "",
     name: "",
     address: "",
     account_number: "",
-    salary: "",
+    overtime: 0,
+    salary: 0,
+    salary_received: 0,
   });
 
   const getDatas = async () => {
@@ -33,8 +36,23 @@ const EmployeePage = () => {
 
   const handleModalDetail = async (data) => {
     setHandleModal(true);
-
+    setEdit(true);
     setEmployee(data);
+  };
+
+  const handleModalClose = () => {
+    setHandleModal(false);
+    setEdit(false);
+    setEmployee({
+      id: "",
+      code: "",
+      name: "",
+      address: "",
+      account_number: "",
+      overtime: 0,
+      salary: 0,
+      salary_received: 0,
+    });
   };
 
   const handleDeleteEmployee = async (id) => {
@@ -72,12 +90,18 @@ const EmployeePage = () => {
     });
   };
 
-  const handleCreateEmployee = async () => {
+  const handleCreateAndUpdateEmployee = async () => {
     try {
       const response = await axios({
-        method: "post",
-        url: "http://localhost:5500/employees/create-employee",
-        data: employee,
+        method: isEdit ? "put" : "post",
+        url: `http://localhost:5500/employees/${
+          isEdit ? "update" : "create"
+        }-employee/${isEdit ? employee.id : ""}`,
+        data: {
+          ...employee,
+          createAt: null,
+          updatedAt: null,
+        },
       });
 
       Swal.fire("Good job!", `${response.data.responseDesc}`, "success").then(
@@ -89,7 +113,9 @@ const EmployeePage = () => {
               name: "",
               address: "",
               account_number: "",
-              salary: "",
+              overtime: 0,
+              salary: 0,
+              salary_received: 0,
             });
 
             getDatas();
@@ -233,9 +259,51 @@ const EmployeePage = () => {
             />
           </div>
         </div>
+        {isEdit && (
+          <>
+            <div className="flex flex-col mt-4">
+              <label className="text-sm font-medium text-subtitle">
+                Jam Lembur
+              </label>
+              <div>
+                <input
+                  value={employee.overtime}
+                  onChange={(e) => onChangeInput("overtime", e.target.value)}
+                  type="text"
+                  maxLength={20}
+                  pattern="\d*"
+                  className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
+                  style={{
+                    width: 330,
+                  }}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col mt-4">
+              <label className="text-sm font-medium text-subtitle">
+                Gaji Diterima(Rp.)
+              </label>
+              <div>
+                <input
+                  value={employee.salary_received}
+                  onChange={(e) =>
+                    onChangeInput("salary_received", e.target.value)
+                  }
+                  type="text"
+                  maxLength={11}
+                  pattern="\d*"
+                  className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
+                  style={{
+                    width: 330,
+                  }}
+                />
+              </div>
+            </div>
+          </>
+        )}
         <div className="flex flex-col justify-center mt-9 items-center">
           <button
-            onClick={handleCreateEmployee}
+            onClick={handleCreateAndUpdateEmployee}
             className=" w-full flex justify-center bg-gray-800 hover:text-gray-100 transition hover:border-textDefault items-center text-sm font-medium text-white py-2.5 px-3 border rounded"
           >
             Tambahkan
@@ -288,7 +356,7 @@ const EmployeePage = () => {
       <Modal
         isOpen={handleModal}
         component={AddItem}
-        handleClose={() => setHandleModal(false)}
+        handleClose={handleModalClose}
       />
     </div>
   );
