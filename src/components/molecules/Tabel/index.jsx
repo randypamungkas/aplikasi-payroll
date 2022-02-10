@@ -26,53 +26,36 @@ const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {(datas || []).map((data, idx) => (
                     <tr key={idx}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                          {data.code}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                          {data.name}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                          {data.address}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                          {data.account_number}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                          {data.salary}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                          <button
-                            onClick={() => handleModalDetail(data)}
-                            className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
-                          >
-                            Edit
-                            <span>
-                              <BsPencil className="ml-2 text-sm" />
-                            </span>
-                          </button>
-                          <button
-                            onClick={() => handleDeleteEmployee(data.id)}
-                            className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
-                          >
-                            Hapus
-                            <span>
-                              <AiOutlineDelete className="ml-2 text-sm" />
-                            </span>
-                          </button>
-                        </div>
-                      </td>
+                      {Object.values(column).map((col, id) => (
+                        <td key={id} className="px-6 py-4 whitespace-nowrap">
+                          {col.field !== "process" ? (
+                            <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                              {data[col.field]}
+                            </div>
+                          ) : (
+                            <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                              <button
+                                onClick={() => handleModalDetail(data)}
+                                className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                              >
+                                Edit
+                                <span>
+                                  <BsPencil className="ml-2 text-sm" />
+                                </span>
+                              </button>
+                              <button
+                                onClick={() => handleDeleteEmployee(data.id)}
+                                className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                              >
+                                Hapus
+                                <span>
+                                  <AiOutlineDelete className="ml-2 text-sm" />
+                                </span>
+                              </button>
+                            </div>
+                          )}
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>

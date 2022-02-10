@@ -65,21 +65,37 @@ const EmployeePage = () => {
     }
   };
 
+  const onChangeInput = (key, val) => {
+    setEmployee({
+      ...employee,
+      [key]: val,
+    });
+  };
+
   const handleCreateEmployee = async () => {
     try {
       const response = await axios({
         method: "post",
         url: "http://localhost:5500/employees/create-employee",
-        data: {
-          code: "",
-          name: "",
-          address: "",
-          account_number: "",
-          salary: "",
-        },
+        data: employee,
       });
 
-      console.log(response);
+      Swal.fire("Good job!", `${response.data.responseDesc}`, "success").then(
+        (result) => {
+          if (result.isConfirmed) {
+            setEmployee({
+              id: "",
+              code: "",
+              name: "",
+              address: "",
+              account_number: "",
+              salary: "",
+            });
+
+            getDatas();
+          }
+        }
+      );
     } catch (err) {
       console.log(err);
     }
@@ -142,6 +158,7 @@ const EmployeePage = () => {
           </label>
           <input
             value={employee.code}
+            onChange={(e) => onChangeInput("code", e.target.value)}
             type="text"
             className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
             style={{
@@ -156,6 +173,7 @@ const EmployeePage = () => {
           <div>
             <input
               value={employee.name}
+              onChange={(e) => onChangeInput("name", e.target.value)}
               type="text"
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
@@ -171,6 +189,7 @@ const EmployeePage = () => {
           <div>
             <input
               value={employee.address}
+              onChange={(e) => onChangeInput("address", e.target.value)}
               type="text"
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
@@ -186,7 +205,9 @@ const EmployeePage = () => {
           <div>
             <input
               value={employee.account_number}
+              onChange={(e) => onChangeInput("account_number", e.target.value)}
               type="text"
+              maxLength={20}
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
                 width: 330,
@@ -201,7 +222,10 @@ const EmployeePage = () => {
           <div>
             <input
               value={employee.salary}
+              onChange={(e) => onChangeInput("salary", e.target.value)}
               type="text"
+              maxLength={11}
+              pattern="\d*"
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
                 width: 330,
