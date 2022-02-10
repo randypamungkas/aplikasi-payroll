@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import axios from "axios";
+import Swal from "sweetalert2";
 import SideMenu from "../../components/molecules/SideMenu";
 import Modal from "../../components/molecules/Modal";
 import Tabel from "../../components/molecules/Tabel";
@@ -8,7 +9,14 @@ import Tabel from "../../components/molecules/Tabel";
 const EmployeePage = () => {
   const [handleModal, setHandleModal] = useState(false);
   const [datas, setDatas] = useState(null);
-  const [employee, setEmployee] = useState(null);
+  const [employee, setEmployee] = useState({
+    id: "",
+    code: "",
+    name: "",
+    address: "",
+    account_number: "",
+    salary: "",
+  });
 
   const getDatas = async () => {
     try {
@@ -17,7 +25,41 @@ const EmployeePage = () => {
         url: "http://localhost:5500/employees/get-all-employee",
       });
 
-      setDatas(response);
+      setDatas(response.data.responseData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleModalDetail = async (data) => {
+    setHandleModal(true);
+
+    setEmployee(data);
+  };
+
+  const handleDeleteEmployee = async (id) => {
+    try {
+      const response = await axios({
+        method: "delete",
+        url: `http://localhost:5500/employees/delete-employee/${id}`,
+      });
+
+      Swal.fire({
+        title: "Anda yakin ingin menghapus Karyawan?",
+        text: "Anda tidak akan dapat mengembalikan ini",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Iya, hapus!",
+        cancelButtonText: "Batal",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setDatas(response.data.responseData);
+
+          Swal.fire("Data terhapus!", "File Anda telah dihapus.", "success");
+        }
+      });
     } catch (err) {
       console.log(err);
     }
@@ -29,13 +71,11 @@ const EmployeePage = () => {
         method: "post",
         url: "http://localhost:5500/employees/create-employee",
         data: {
-          code: "005",
-          name: "Fahras Test",
-          address: "Cipinang Muara",
-          account_number: "81327932",
-          salary: "400000",
-          overtime: "2022-02-08T13:47:58Z",
-          salary_received: "1000000",
+          code: "",
+          name: "",
+          address: "",
+          account_number: "",
+          salary: "",
         },
       });
 
@@ -88,6 +128,7 @@ const EmployeePage = () => {
           </label>
           <input
             disabled
+            value={employee.id}
             type="text"
             className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
             style={{
@@ -100,6 +141,7 @@ const EmployeePage = () => {
             Kode Karyawan
           </label>
           <input
+            value={employee.code}
             type="text"
             className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
             style={{
@@ -113,6 +155,7 @@ const EmployeePage = () => {
           </label>
           <div>
             <input
+              value={employee.name}
               type="text"
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
@@ -127,6 +170,7 @@ const EmployeePage = () => {
           </label>
           <div>
             <input
+              value={employee.address}
               type="text"
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
@@ -141,6 +185,7 @@ const EmployeePage = () => {
           </label>
           <div>
             <input
+              value={employee.account_number}
               type="text"
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
@@ -155,6 +200,7 @@ const EmployeePage = () => {
           </label>
           <div>
             <input
+              value={employee.salary}
               type="text"
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
@@ -204,7 +250,12 @@ const EmployeePage = () => {
                 </button>
               </div>
               <div className="mt-8">
-                <Tabel column={column} datas={datas} />
+                <Tabel
+                  column={column}
+                  datas={datas}
+                  handleModalDetail={handleModalDetail}
+                  handleDeleteEmployee={handleDeleteEmployee}
+                />
               </div>
             </div>
           </div>

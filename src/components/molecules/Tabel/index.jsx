@@ -2,7 +2,7 @@ import React from "react";
 import { BsPencil } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const Tabel = ({ column, datas }) => {
+const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
   return (
     <div>
       <div className="flex flex-col">
@@ -24,7 +24,7 @@ const Tabel = ({ column, datas }) => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {(datas?.data || []).map((data, idx) => (
+                  {(datas || []).map((data, idx) => (
                     <tr key={idx}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
@@ -53,13 +53,19 @@ const Tabel = ({ column, datas }) => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                          <button className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full">
+                          <button
+                            onClick={() => handleModalDetail(data)}
+                            className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                          >
                             Edit
                             <span>
                               <BsPencil className="ml-2 text-sm" />
                             </span>
                           </button>
-                          <button className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full">
+                          <button
+                            onClick={() => handleDeleteEmployee(data.id)}
+                            className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                          >
                             Hapus
                             <span>
                               <AiOutlineDelete className="ml-2 text-sm" />
