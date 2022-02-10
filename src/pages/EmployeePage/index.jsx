@@ -87,6 +87,7 @@ const EmployeePage = () => {
     setEmployee({
       ...employee,
       [key]: val,
+      salary_received: key === "overtime" ? val * employee.salary : 0,
     });
   };
 
@@ -159,7 +160,7 @@ const EmployeePage = () => {
   ];
 
   const AddItem = (
-    <div className="px-10 py-6 bg-white max-w-max rounded-md __montserat-text">
+    <div className="px-10 py-6 m-auto bg-white max-w-max rounded-md __montserat-text">
       <h1 className="font-bold pt-4 text-2xl text-center">
         Tambah Data Karyawan
       </h1>
@@ -270,7 +271,7 @@ const EmployeePage = () => {
                   value={employee.overtime}
                   onChange={(e) => onChangeInput("overtime", e.target.value)}
                   type="text"
-                  maxLength={20}
+                  maxLength={1}
                   pattern="\d*"
                   className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
                   style={{
@@ -286,10 +287,8 @@ const EmployeePage = () => {
               <div>
                 <input
                   value={employee.salary_received}
-                  onChange={(e) =>
-                    onChangeInput("salary_received", e.target.value)
-                  }
                   type="text"
+                  disabled
                   maxLength={11}
                   pattern="\d*"
                   className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
