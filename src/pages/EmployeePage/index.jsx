@@ -87,7 +87,8 @@ const EmployeePage = () => {
     setEmployee({
       ...employee,
       [key]: val,
-      salary_received: key === "overtime" ? val * employee.salary : 0,
+      salary_received:
+        key === "overtime" ? val * employee.salary : employee.salary_received,
     });
   };
 
