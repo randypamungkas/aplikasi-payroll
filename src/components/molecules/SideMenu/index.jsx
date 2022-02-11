@@ -1,9 +1,9 @@
-import React from "react";
-import { staticConst } from "../../../static/staticConst";
-import { useNavigate } from "react-router";
+import React from 'react'
+import { staticConst } from '../../../static/staticConst'
+import { useNavigate } from 'react-router'
 
 const SideMenu = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <div className="rounded-lg __montserat-text shadow border border-gray-200 bg-white py-5">
@@ -13,8 +13,8 @@ const SideMenu = () => {
             <div
               className={`${
                 el.menu.path === window.location.pathname
-                  ? "bg-gray-800 text-white"
-                  : ""
+                  ? 'bg-gray-800 text-white'
+                  : ''
               } text-sm py-1 hover:bg-gray-100 text-gray-600 hover:text-gray-600 cursor-pointer flex items-center px-4`}
             >
               <span>{el.menu.icon}</span>
@@ -29,7 +29,7 @@ const SideMenu = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SideMenu;
+export default SideMenu

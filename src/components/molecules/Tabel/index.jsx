@@ -1,7 +1,8 @@
-import React from "react";
-import moment from "moment";
-import { BsPencil, BsPrinterFill } from "react-icons/bs";
-import { AiOutlineDelete } from "react-icons/ai";
+import React from 'react'
+import moment from 'moment'
+import { BsPencil } from 'react-icons/bs'
+import { AiOutlineDelete } from 'react-icons/ai'
+import PdfExport from '../PdfExport'
 
 const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
   return (
@@ -31,64 +32,52 @@ const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
                         <td key={id} className="px-6 py-4 whitespace-nowrap">
                           {(() => {
                             switch (col.field) {
-                              case "date":
+                              case 'date':
                                 return (
                                   <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                                    {data["salary_received"] !== 0
-                                      ? moment(data["updatedAt"]).format(
-                                          "D MMM YYYY"
+                                    {data['salary_received'] !== 0
+                                      ? moment(data['updatedAt']).format(
+                                          'D MMM YYYY',
                                         )
-                                      : "-"}
+                                      : '-'}
                                   </div>
-                                );
+                                )
 
-                              case "time":
+                              case 'time':
                                 return (
                                   <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                                    {data["salary_received"] !== 0
-                                      ? moment(data["updatedAt"]).format(
-                                          "HH:mm"
+                                    {data['salary_received'] !== 0
+                                      ? moment(data['updatedAt']).format(
+                                          'HH:mm',
                                         )
-                                      : "-"}
+                                      : '-'}
                                   </div>
-                                );
+                                )
 
-                              case "salary":
+                              case 'salary':
                                 return (
                                   <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                                    Rp{" "}
-                                    {Intl.NumberFormat("en-US").format(
-                                      data["salary"]
+                                    Rp{' '}
+                                    {Intl.NumberFormat('en-US').format(
+                                      data['salary'],
                                     )}
                                   </div>
-                                );
+                                )
 
-                              case "salary_received":
+                              case 'salary_received':
                                 return (
                                   <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                                    Rp{" "}
-                                    {Intl.NumberFormat("en-US").format(
-                                      data["salary_received"]
+                                    Rp{' '}
+                                    {Intl.NumberFormat('en-US').format(
+                                      data['salary_received'],
                                     )}
                                   </div>
-                                );
+                                )
 
-                              case "action":
-                                return (
-                                  <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-                                    <button
-                                      onClick={() => null}
-                                      className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
-                                    >
-                                      Cetak
-                                      <span>
-                                        <BsPrinterFill className="ml-2 text-sm" />
-                                      </span>
-                                    </button>
-                                  </div>
-                                );
+                              case 'action':
+                                return <PdfExport exportData={data} />
 
-                              case "process":
+                              case 'process':
                                 return (
                                   <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
                                     <button
@@ -112,14 +101,14 @@ const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
                                       </span>
                                     </button>
                                   </div>
-                                );
+                                )
 
                               default:
                                 return (
                                   <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
                                     {data[col.field]}
                                   </div>
-                                );
+                                )
                             }
                           })()}
                         </td>
@@ -133,7 +122,7 @@ const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Tabel;
+export default Tabel

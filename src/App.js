@@ -1,15 +1,15 @@
-import "./App.css";
-import RouteList from "./routes/MainRoutes";
+import './App.css'
+import RouteList from './routes/MainRoutes'
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
-} from "react-router-dom";
-import "@material-tailwind/react/tailwind.css";
-import Navbar from "./components/molecules/Navbar";
+} from 'react-router-dom'
+import '@material-tailwind/react/tailwind.css'
+import Navbar from './components/molecules/Navbar'
 
-const isAuth = true;
+const isAuth = localStorage.getItem('isAuth')
 function App() {
   return (
     <Router>
@@ -24,11 +24,12 @@ function App() {
                   isAuth ? (
                     <div
                       className={`${
-                        el.path === "/login" && "pt-14"
+                        el.path === '/login' && 'pt-14'
                       } min-h-screen`}
                     >
-                      {el.path !== "/login" && <Navbar />}
+                      {el.path !== '/login' && <Navbar />}
                       {el.component}
+                      {console.log(el.permission)}
                     </div>
                   ) : (
                     <Navigate to="/login" />
@@ -36,10 +37,10 @@ function App() {
                 ) : (
                   <div
                     className={`${
-                      el.path === "/login" && "pt-14"
+                      el.path === '/login' && 'pt-14'
                     } min-h-screen`}
                   >
-                    {el.path !== "/login" && <Navbar />}
+                    {el.path !== '/login' && <Navbar />}
                     {el.component}
                   </div>
                 )
@@ -50,7 +51,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

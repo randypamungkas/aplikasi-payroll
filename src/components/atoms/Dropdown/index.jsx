@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Dropdown = () => {
   return (
@@ -13,7 +13,7 @@ const Dropdown = () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Dropdown;
+export default Dropdown

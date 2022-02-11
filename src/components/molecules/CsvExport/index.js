@@ -1,7 +1,7 @@
-import React from "react";
-import { BsPrinterFill } from "react-icons/bs";
-import { CSVLink } from "react-csv";
-import moment from "moment";
+import React from 'react'
+import { BsPrinterFill } from 'react-icons/bs'
+import { CSVLink } from 'react-csv'
+import moment from 'moment'
 
 const CsvExport = ({ exportData }) => {
   return (
@@ -9,7 +9,7 @@ const CsvExport = ({ exportData }) => {
       <CSVLink
         data={exportData || []}
         filename={`Export${window.location.pathname}-${moment().format(
-          "DDMMYYYY"
+          'DDMMYYYY',
         )}`}
       >
         <div className="flex items-center py-2 px-4">
@@ -20,7 +20,7 @@ const CsvExport = ({ exportData }) => {
         </div>
       </CSVLink>
     </button>
-  );
-};
+  )
+}
 
-export default CsvExport;
+export default CsvExport

@@ -1,12 +1,12 @@
-import { CgProfile } from "react-icons/cg";
-import { useNavigate } from "react-router";
+import { CgProfile } from 'react-icons/cg'
+import { useNavigate } from 'react-router'
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <div className="w-screen shadow-md bg-white fixed z-20 py-2">
       <div className="mycontainer flex justify-between items-center py-0.5">
-        <div onClick={() => navigate("/")} className="text-lg">
+        <div onClick={() => navigate('/')} className="text-lg">
           PayrollApp
         </div>
         <div className="flex justify-between items-center gap-8">
@@ -19,14 +19,22 @@ const Navbar = () => {
               className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <a href="/login">Logout</a>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem('isAuth')
+
+                    window.location.href = '/login'
+                  }}
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
