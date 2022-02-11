@@ -29,7 +29,6 @@ function App() {
                     >
                       {el.path !== '/login' && <Navbar />}
                       {el.component}
-                      {console.log(el.permission)}
                     </div>
                   ) : (
                     <Navigate to="/login" />
