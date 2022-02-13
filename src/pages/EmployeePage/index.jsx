@@ -89,7 +89,7 @@ const EmployeePage = () => {
       [key]: val,
       salary_received:
         key === 'overtime'
-          ? val * ((employee.salary * 2) / 100) + employee.salary
+          ? val * 60000 + employee.salary
           : employee.salary_received,
     })
   }
