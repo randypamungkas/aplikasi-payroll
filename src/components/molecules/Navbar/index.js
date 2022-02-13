@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center gap-8">
           <div className="dropdown dropdown-left">
             <div tabIndex="0" className="m-1">
-              <CgProfile className="text-3xl" />
+              <CgProfile className="text-3xl cursor-pointer" />
             </div>
             <ul
               tabIndex="0"
@@ -20,6 +20,7 @@ const Navbar = () => {
             >
               <li>
                 <button
+                  className="rounded-md"
                   onClick={() => {
                     localStorage.removeItem('isAuth')
 

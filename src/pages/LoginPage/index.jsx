@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { BsFillLockFill, BsFillUnlockFill } from 'react-icons/bs'
 
 const LoginPage = () => {
   const [errorAuth, setErrorAuth] = useState('')
+  const [lockPass, setLockPass] = useState(true)
   const [isAuth, setAuth] = useState({
     email: '',
     password: '',
@@ -50,14 +52,21 @@ const LoginPage = () => {
             <label className="text-sm font-medium text-subtitle">
               Password
             </label>
-            <div>
+            <div className="relative">
               <input
-                type="text"
+                type={lockPass ? 'password' : 'text'}
                 value={isAuth.password}
                 onChange={(e) => handleChangeAuth('password', e.target.value)}
                 className="px-3 py-3 mt-2 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border border-gray-200 outline-none focus:outline-none focus:ring-0 pl-20 focus:border-gray-400"
                 style={{ width: 330 }}
               />
+              <button onClick={() => setLockPass(!lockPass)}>
+                {lockPass ? (
+                  <BsFillLockFill className="absolute top-6 right-3" />
+                ) : (
+                  <BsFillUnlockFill className="absolute top-6 right-3" />
+                )}
+              </button>
             </div>
           </div>
           <div className=" flex justify-between items-center mt-3">

@@ -1,34 +1,47 @@
 import React from 'react'
-import Pdf from 'react-to-pdf'
+import axios from 'axios'
+import FileSaver from 'file-saver'
+import moment from 'moment'
+
 import { BsPrinterFill } from 'react-icons/bs'
 
-const ref = React.createRef()
-
 const PdfExport = ({ exportData }) => {
-  const options = {
-    orientation: 'landscape',
-    unit: 'in',
-    format: [4, 2],
+  const handleExportPdf = async () => {
+    try {
+      const response = await axios(
+        {
+          method: 'get',
+          url: `http://localhost:5500/employees/print-payslip-employee/${exportData.id}`,
+        },
+        { responseType: 'arraybuffer' },
+      )
+
+      const blob = new Blob([response.data], {
+        type: 'application/pdf;charset=utf-8',
+      })
+
+      FileSaver.saveAs(
+        blob,
+        `Export${window.location.pathname}-${moment().format(
+          'DDMMYYYY-HHMMSS',
+        )}.pdf`,
+      )
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
-    <div className="App">
-      <Pdf targetRef={ref} filename="code-example.pdf" options={options}>
-        {({ toPdf, targetRef }) => (
-          <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
-            <button
-              ref={targetRef}
-              onClick={toPdf}
-              className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
-            >
-              Cetak
-              <span>
-                <BsPrinterFill className="ml-2 text-sm" />
-              </span>
-            </button>
-          </div>
-        )}
-      </Pdf>
+    <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+      <button
+        onClick={handleExportPdf}
+        className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+      >
+        Cetak
+        <span>
+          <BsPrinterFill className="ml-2 text-sm" />
+        </span>
+      </button>
     </div>
   )
 }

@@ -9,7 +9,7 @@ const CsvExport = ({ exportData }) => {
       <CSVLink
         data={exportData || []}
         filename={`Export${window.location.pathname}-${moment().format(
-          'DDMMYYYY',
+          'DDMMYYYY-HHMMSS',
         )}`}
       >
         <div className="flex items-center py-2 px-4">
