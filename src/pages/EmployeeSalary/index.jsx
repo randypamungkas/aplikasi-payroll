@@ -43,7 +43,7 @@ const EmployeeSalary = () => {
     },
     {
       field: 'overtime',
-      name: 'UANG LEMBUR',
+      name: 'JAM LEMBUR',
     },
     {
       field: 'salary_received',
