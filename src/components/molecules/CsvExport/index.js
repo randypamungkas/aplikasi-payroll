@@ -4,10 +4,12 @@ import { CSVLink } from 'react-csv'
 import moment from 'moment'
 
 const CsvExport = ({ exportData }) => {
+  const dataCsv = (exportData || []).map(({ id, ...data }) => data)
+
   return (
     <button className="mt-4 bg-gray-800 flex justify-between hover:text-white transition hover:border-gray-800 items-center text-sm font-medium text-gray-100 py-1.5 px-3 border rounded-full">
       <CSVLink
-        data={exportData || []}
+        data={dataCsv || []}
         filename={`Export${window.location.pathname}-${moment().format(
           'DDMMYYYY-HHMMSS',
         )}`}
