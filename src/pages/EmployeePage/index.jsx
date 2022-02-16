@@ -184,7 +184,7 @@ const EmployeePage = () => {
         </div>
         <div className="mb-3 pt-0 flex flex-col">
           <label className="text-sm font-medium text-subtitle">
-            Kode Karyawan
+            Kode Karyawan<span className="text-danger">*</span>
           </label>
           <input
             value={employee.code}
@@ -198,7 +198,7 @@ const EmployeePage = () => {
         </div>
         <div className="flex flex-col mt-4">
           <label className="text-sm font-medium text-subtitle">
-            Nama Karyawan
+            Nama Karyawan<span className="text-danger">*</span>
           </label>
           <div>
             <input
@@ -214,7 +214,7 @@ const EmployeePage = () => {
         </div>
         <div className="flex flex-col mt-4">
           <label className="text-sm font-medium text-subtitle">
-            Alamat Karyawan
+            Alamat Karyawan<span className="text-danger">*</span>
           </label>
           <div>
             <input
@@ -230,7 +230,7 @@ const EmployeePage = () => {
         </div>
         <div className="flex flex-col mt-4">
           <label className="text-sm font-medium text-subtitle">
-            No.Rekening Bank
+            No.Rekening Bank<span className="text-danger">*</span>
           </label>
           <div>
             <input
@@ -247,7 +247,7 @@ const EmployeePage = () => {
         </div>
         <div className="flex flex-col mt-4">
           <label className="text-sm font-medium text-subtitle">
-            Gaji Pokok(Rp.)
+            Gaji Pokok(Rp.)<span className="text-danger">*</span>
           </label>
           <div>
             <input
@@ -308,7 +308,7 @@ const EmployeePage = () => {
             onClick={handleCreateAndUpdateEmployee}
             className=" w-full flex justify-center bg-gray-800 hover:text-gray-100 transition hover:border-textDefault items-center text-sm font-medium text-white py-2.5 px-3 border rounded"
           >
-            Tambahkan
+            {isEdit ? 'Edit' : 'Tambahkan'}
           </button>
         </div>
       </div>
