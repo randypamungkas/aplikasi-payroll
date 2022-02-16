@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import moment from 'moment'
+import axios from 'axios'
 import { BsPencil } from 'react-icons/bs'
 import { AiOutlineDelete } from 'react-icons/ai'
+import { useReactToPrint } from 'react-to-print'
+import { BsPrinterFill } from 'react-icons/bs'
 import PdfExport from '../PdfExport'
 
 const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
+  const [dataWithId, setDataWithId] = useState('')
+  const componentRef = useRef()
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  })
+
+  const getDataPrint = async (dataId) => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `http://localhost:5500/employees/detail-employee/${dataId}`,
+      })
+
+      setDataWithId(response)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <div className="flex flex-col">
@@ -75,7 +97,26 @@ const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
                                 )
 
                               case 'action':
-                                return <PdfExport exportData={data} />
+                                return (
+                                  <div>
+                                    <PdfExport
+                                      dataWithId={dataWithId}
+                                      componentRef={componentRef}
+                                    />
+                                    <button
+                                      onClick={async () => {
+                                        await getDataPrint(data.id)
+                                        handlePrint()
+                                      }}
+                                      className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                                    >
+                                      Cetak
+                                      <span>
+                                        <BsPrinterFill className="ml-2 text-sm" />
+                                      </span>
+                                    </button>
+                                  </div>
+                                )
 
                               case 'process':
                                 return (
