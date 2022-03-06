@@ -1,7 +1,28 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import SideMenu from "../../components/molecules/SideMenu";
 import Tabel from "../../components/molecules/Tabel";
 
 const EmployeePaySlips = () => {
+  const [datas, setDatas] = useState(null);
+
+  const getDatas = async () => {
+    try {
+      const response = await axios({
+        method: "get",
+        url: "http://localhost:5500/employees/get-all-employee",
+      });
+
+      setDatas(response.data.responseData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getDatas();
+  }, []);
+
   const column = [
     {
       field: "code",
@@ -16,16 +37,12 @@ const EmployeePaySlips = () => {
       name: "NO. REKENING",
     },
     {
-      field: "salary_code",
-      name: "KODE GAJI",
-    },
-    {
       field: "salary",
       name: "GAJI POKOK",
     },
     {
       field: "overtime",
-      name: "UANG LEMBUR",
+      name: "JAM LEMBUR",
     },
     {
       field: "salary_received",
@@ -44,72 +61,7 @@ const EmployeePaySlips = () => {
       name: "AKSI",
     },
   ];
-  
-  const span1 =[
-    {
-      name:"001"
-    },
-    {
-      name:"Ahmad "
-    },
-    {
-      name:"0524958673"
-    },
-    {
-      name:"GJ001"
-    },
-    {
-      name:"3.500.000,00"
-    },
-    {
-      name:"4.161.849,00"
-    },
-    {
-      name:"34.161.849,00"
-    },
-    {
-      name:"29/11/2018"
-    },
-    {
-      name:"05:21:01"
-    },
-    {
-      name: <button>Cetak</button>,
-    },
-  ];
 
-  const span2 =[
-    {
-      name:"001"
-    },
-    {
-      name:"Ahmad "
-    },
-    {
-      name:"0524958673"
-    },
-    {
-      name:"GJ001"
-    },
-    {
-      name:"3.500.000,00"
-    },
-    {
-      name:"242.774,00"
-    },
-    {
-      name:"34.161.849,00"
-    },
-    {
-      name:"29/11/2018"
-    },
-    {
-      name:"05:33:47"
-    },
-    {
-      name: <button>Cetak</button>,
-    },
-  ];
   return (
     <div>
       <div
@@ -124,13 +76,11 @@ const EmployeePaySlips = () => {
             <div className="mb-11">
               <div className="flex justify-between items-center border-b-2 border-gray-200 pb-4">
                 <div>
-                  <div className="font-semibold">Cetak Gaji  Karyawan</div>
+                  <div className="font-semibold">Cetak Slip Gaji Karyawan</div>
                 </div>
               </div>
               <div className="mt-8">
-                <Tabel column={column} />
-                <Tabel column={span1} />
-                <Tabel column={span2} />
+                <Tabel column={column} datas={datas} />
               </div>
             </div>
           </div>

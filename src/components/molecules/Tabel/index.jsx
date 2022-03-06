@@ -1,8 +1,32 @@
-import React from "react";
-// import { staticConst } from "../../static/staticConst";
-// import { BsPencil } from "react-icons/bs";
+import React, { useRef, useState } from 'react'
+import moment from 'moment'
+import axios from 'axios'
+import { BsPencil } from 'react-icons/bs'
+import { AiOutlineDelete } from 'react-icons/ai'
+import { useReactToPrint } from 'react-to-print'
+import { BsPrinterFill } from 'react-icons/bs'
+import PdfExport from '../PdfExport'
 
-const Tabel = ({ column }) => {
+const Tabel = ({ column, datas, handleDeleteEmployee, handleModalDetail }) => {
+  const [dataWithId, setDataWithId] = useState('')
+  const componentRef = useRef()
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  })
+
+  const getDataPrint = async (dataId) => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `http://localhost:5500/employees/detail-employee/${dataId}`,
+      })
+
+      setDataWithId(response)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <div className="flex flex-col">
@@ -16,21 +40,130 @@ const Tabel = ({ column }) => {
                       <th
                         key={idx}
                         scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         {col.name}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200"></tbody>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {(datas || []).map((data, idx) => (
+                    <tr key={idx}>
+                      {Object.values(column).map((col, id) => (
+                        <td key={id} className="px-6 py-4 whitespace-nowrap">
+                          {(() => {
+                            switch (col.field) {
+                              case 'date':
+                                return (
+                                  <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                                    {data['salary_received'] !== 0
+                                      ? moment(data['updatedAt']).format(
+                                          'D MMM YYYY',
+                                        )
+                                      : '-'}
+                                  </div>
+                                )
+
+                              case 'time':
+                                return (
+                                  <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                                    {data['salary_received'] !== 0
+                                      ? moment(data['updatedAt']).format(
+                                          'HH:mm',
+                                        )
+                                      : '-'}
+                                  </div>
+                                )
+
+                              case 'salary':
+                                return (
+                                  <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                                    Rp{' '}
+                                    {Intl.NumberFormat('en-US').format(
+                                      data['salary'],
+                                    )}
+                                  </div>
+                                )
+
+                              case 'salary_received':
+                                return (
+                                  <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                                    Rp{' '}
+                                    {Intl.NumberFormat('en-US').format(
+                                      data['salary_received'],
+                                    )}
+                                  </div>
+                                )
+
+                              case 'action':
+                                return (
+                                  <div>
+                                    <PdfExport
+                                      dataWithId={dataWithId}
+                                      componentRef={componentRef}
+                                    />
+                                    <button
+                                      onClick={async () => {
+                                        await getDataPrint(data.id)
+                                        handlePrint()
+                                      }}
+                                      className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                                    >
+                                      Cetak
+                                      <span>
+                                        <BsPrinterFill className="ml-2 text-sm" />
+                                      </span>
+                                    </button>
+                                  </div>
+                                )
+
+                              case 'process':
+                                return (
+                                  <div className="text-sm flex m-auto justify-center font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                                    <button
+                                      onClick={() => handleModalDetail(data)}
+                                      className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                                    >
+                                      Edit
+                                      <span>
+                                        <BsPencil className="ml-2 text-sm" />
+                                      </span>
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        handleDeleteEmployee(data.id)
+                                      }
+                                      className="ml-2 bg-transparent flex justify-between hover:text-textDefault transition hover:border-textDefault items-center text-sm font-medium text-subtitle py-1.5 px-3 border rounded-full"
+                                    >
+                                      Hapus
+                                      <span>
+                                        <AiOutlineDelete className="ml-2 text-sm" />
+                                      </span>
+                                    </button>
+                                  </div>
+                                )
+
+                              default:
+                                return (
+                                  <div className="text-sm font-medium text-gray-900 max-w-px __text-elipsis-one-line">
+                                    {data[col.field]}
+                                  </div>
+                                )
+                            }
+                          })()}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Tabel;
+export default Tabel

@@ -1,9 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useRef } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
 
-export default function Example({ isOpen, handleClose, component }) {
-  const cancelButtonRef = useRef(null);
+const Modal = ({ isOpen, handleClose, component }) => {
+  const cancelButtonRef = useRef(null)
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -25,7 +25,7 @@ export default function Example({ isOpen, handleClose, component }) {
           >
             <Dialog.Overlay
               className="fixed inset-0 bg-opacity-30 transition-opacity"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
+              style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
             />
           </Transition.Child>
 
@@ -52,5 +52,7 @@ export default function Example({ isOpen, handleClose, component }) {
         </div>
       </Dialog>
     </Transition.Root>
-  );
+  )
 }
+
+export default Modal
