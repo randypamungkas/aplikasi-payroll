@@ -170,10 +170,7 @@ const EmployeePage = () => {
       name: yup.string().required("masukan nama karyawan"),
       address: yup.string().required("masukan alamat karyawan"),
       account_number: yup.string().required("masukan nomor rekening karyawan"),
-      salary: yup
-        .number("masukan gaji karyawan")
-        .positive("masukan gaji karyawan")
-        .required(),
+      salary: yup.number().integer().required("masukan gaji karyawan"),
     })
     .required();
   const {
@@ -183,6 +180,7 @@ const EmployeePage = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  console.log(errors);
   const AddItem = (
     <div className="px-10 py-6 m-auto bg-white max-w-max rounded-md __montserat-text">
       <h1 className="font-bold pt-4 text-2xl text-center">
@@ -354,15 +352,15 @@ const EmployeePage = () => {
               </div>
             </>
           )}
+          <div className="flex flex-col justify-center mt-9 items-center">
+            <button
+              onClick={handleSubmit(handleCreateAndUpdateEmployee)}
+              className=" w-full flex justify-center bg-gray-800 hover:text-gray-100 transition hover:border-textDefault items-center text-sm font-medium text-white py-2.5 px-3 border rounded"
+            >
+              {isEdit ? "Edit" : "Tambahkan"}
+            </button>
+          </div>
         </form>
-        <div className="flex flex-col justify-center mt-9 items-center">
-          <button
-            onClick={handleSubmit(handleCreateAndUpdateEmployee)}
-            className=" w-full flex justify-center bg-gray-800 hover:text-gray-100 transition hover:border-textDefault items-center text-sm font-medium text-white py-2.5 px-3 border rounded"
-          >
-            {isEdit ? "Edit" : "Tambahkan"}
-          </button>
-        </div>
       </div>
     </div>
   );
