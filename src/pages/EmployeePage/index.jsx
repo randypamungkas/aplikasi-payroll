@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { useEffect, useState } from 'react'
 import { BsPlusLg } from 'react-icons/bs'
 import axios from 'axios'
@@ -235,8 +236,16 @@ const EmployeePage = () => {
           <div>
             <input
               value={employee.account_number}
-              onChange={(e) => onChangeInput('account_number', e.target.value)}
+              onChange={(e) =>
+                onChangeInput(
+                  'account_number',
+                  e.target.value
+                    .replace(/[^0-9.]/g, '')
+                    .replace(/(\.*)\./g, '$1'),
+                )
+              }
               type="text"
+              pattern="\d*"
               maxLength={20}
               className="px-3 mt-2 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm outline-none focus:border-gray-400 focus:outline-none focus:ring-0 border border-gray-200"
               style={{
@@ -252,7 +261,14 @@ const EmployeePage = () => {
           <div>
             <input
               value={employee.salary}
-              onChange={(e) => onChangeInput('salary', e.target.value)}
+              onChange={(e) =>
+                onChangeInput(
+                  'salary',
+                  e.target.value
+                    .replace(/[^0-9.]/g, '')
+                    .replace(/(\.*)\./g, '$1'),
+                )
+              }
               type="text"
               maxLength={8}
               pattern="\d*"
@@ -272,7 +288,14 @@ const EmployeePage = () => {
               <div>
                 <input
                   value={employee.overtime}
-                  onChange={(e) => onChangeInput('overtime', e.target.value)}
+                  onChange={(e) =>
+                    onChangeInput(
+                      'overtime',
+                      e.target.value
+                        .replace(/[^0-9.]/g, '')
+                        .replace(/(\.*)\./g, '$1'),
+                    )
+                  }
                   type="text"
                   maxLength={1}
                   pattern="\d*"
