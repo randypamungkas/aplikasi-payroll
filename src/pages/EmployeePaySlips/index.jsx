@@ -1,72 +1,72 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import SideMenu from '../../components/molecules/SideMenu'
-import Tabel from '../../components/molecules/Tabel'
+import { useEffect, useState } from "react";
+import axios from "axios";
+import SideMenu from "../../components/molecules/SideMenu";
+import Tabel from "../../components/molecules/Tabel";
 
 const EmployeePaySlips = () => {
-  const [datas, setDatas] = useState(null)
+  const [datas, setDatas] = useState(null);
 
   const getDatas = async () => {
     try {
       const response = await axios({
-        method: 'get',
-        url: 'http://localhost:5500/employees/get-all-employee',
-      })
+        method: "get",
+        url: "http://localhost:5500/employees/get-all-employee",
+      });
 
-      setDatas(response.data.responseData)
+      setDatas(response.data.responseData);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
-    getDatas()
-  }, [])
+    getDatas();
+  }, []);
 
   const column = [
     {
-      field: 'code',
-      name: 'KODE',
+      field: "code",
+      name: "KODE",
     },
     {
-      field: 'name',
-      name: 'NAMA',
+      field: "name",
+      name: "NAMA",
     },
     {
-      field: 'account_number',
-      name: 'NO. REKENING',
+      field: "account_number",
+      name: "NO. REKENING",
     },
     {
-      field: 'salary',
-      name: 'GAJI POKOK',
+      field: "salary",
+      name: "GAJI POKOK",
     },
     {
-      field: 'overtime',
-      name: 'JAM LEMBUR',
+      field: "overtime",
+      name: "JAM LEMBUR",
     },
     {
-      field: 'salary_received',
-      name: 'GAJI DITERIMA',
+      field: "salary_received",
+      name: "GAJI DITERIMA",
     },
     {
-      field: 'date',
-      name: 'TANGGAL TRANSFER',
+      field: "date",
+      name: "TANGGAL TRANSFER",
     },
     {
-      field: 'time',
-      name: 'JAM TRANSFER',
+      field: "time",
+      name: "JAM TRANSFER",
     },
     {
-      field: 'action',
-      name: 'AKSI',
+      field: "action",
+      name: "AKSI",
     },
-  ]
+  ];
 
   return (
     <div>
       <div
         className="mycontainer mobile:mycontainerfull py-7 gap-x-7 grid"
-        style={{ gridTemplateColumns: '1.2fr 5fr' }}
+        style={{ gridTemplateColumns: "1.2fr 5fr" }}
       >
         <div className="mt-20">
           <SideMenu />
@@ -87,7 +87,7 @@ const EmployeePaySlips = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EmployeePaySlips
+export default EmployeePaySlips;
